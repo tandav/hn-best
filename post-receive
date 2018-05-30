@@ -1,0 +1,27 @@
+#!/bin/bash
+
+WORK_GIT_DIR='/home/ubuntu/hn-best'
+BARE_GIT_DIR='/home/ubuntu/hn-best.git'
+DEPLOY_BRANCH='master'
+
+while read oldrev newrev ref
+do
+    # only checking out the master (or whatever branch you would like to deploy)
+    if [[ $ref = refs/heads/$DEPLOY_BRANCH ]];
+    then
+        echo 'Master ref received.  Deploying master branch to production...'
+        git --work-tree=$WORK_GIT_DIR --git-dir=$BARE_GIT_DIR checkout -f
+        git show --stat $newrev
+
+        # here your other build commands , some diff, date, etc
+    else
+        echo 'Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server.'
+    fi
+done
+
+# some links
+# - [Simple automated GIT Deployment using Hooks](https://gist.github.com/noelboss/3fe13927025b89757f8fb12e9066f2fa#file-post-receive)
+# - [How To Use Git Hooks To Automate Development and Deployment Tasks | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-use-git-hooks-to-automate-development-and-deployment-tasks)
+# - [Git Deploying a Website - YouTube](https://www.youtube.com/watch?v=9qIK8ZC9BnU)
+# - google: deploy using git hooks
+# also: https://stackoverflow.com/a/37861972/4204843
