@@ -3,7 +3,7 @@
 from subprocess import run
 import sys
 
-WORK_GIT_DIR='../repo'
+WORK_GIT_DIR='../hn-best'
 BARE_GIT_DIR='.'
 
 
