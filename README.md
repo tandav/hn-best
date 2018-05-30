@@ -10,3 +10,4 @@
 ## log
 - for some reason can't set up `git config core.hooksPath ../hn-best/hooks`. now `post-receive` hook is in default location. If i want to edit it, i just use `sshfs`
     - now move it to repo and add symlink to .git/hooks
+test
